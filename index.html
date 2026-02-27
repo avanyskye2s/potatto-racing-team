@@ -10,7 +10,6 @@
 <style>
 :root {
   --bg: #07090f;
-  --card: rgba(255,255,255,0.05);
   --accent: #ffb703;
   --accent2: #ff5400;
   --text: #ffffff;
@@ -25,12 +24,46 @@
 
 body {
   font-family: Inter, sans-serif;
-  background: linear-gradient(180deg, #0b0f1c, #07090f);
+  background: #07090f;
   color: var(--text);
   overflow-x: hidden;
 }
 
-/* NAVBAR */
+/* 🔥 АНИМИРОВАННЫЙ ФОН */
+
+.background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.background span {
+  position: absolute;
+  display: block;
+  width: 2px;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+  animation: speed 3s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes speed {
+  0% {
+    transform: translateY(-150px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120vh);
+    opacity: 0;
+  }
+}
+
+/* NAV */
 
 nav {
   position: fixed;
@@ -39,23 +72,20 @@ nav {
   padding: 20px 40px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   backdrop-filter: blur(10px);
   background: rgba(0,0,0,0.4);
-  z-index: 1000;
+  z-index: 10;
 }
 
 nav h1 {
   font-family: Orbitron;
-  font-size: 20px;
   color: var(--accent);
 }
 
 nav a {
   color: white;
+  margin-left: 20px;
   text-decoration: none;
-  margin-left: 25px;
-  font-size: 14px;
   transition: 0.3s;
 }
 
@@ -72,7 +102,6 @@ header {
   justify-content: center;
   text-align: center;
   padding: 20px;
-  background: radial-gradient(circle at center, #111827 0%, #07090f 70%);
 }
 
 header h2 {
@@ -87,9 +116,6 @@ header p {
   margin-top: 20px;
   color: var(--muted);
   font-size: 18px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .btn {
@@ -109,18 +135,17 @@ header p {
   box-shadow: 0 0 25px rgba(255, 183, 3, 0.5);
 }
 
-/* SECTIONS */
+/* SECTION */
 
 section {
   padding: 100px 20px;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: auto;
 }
 
 section h3 {
   text-align: center;
   font-family: Orbitron;
-  font-size: 32px;
   margin-bottom: 60px;
 }
 
@@ -133,7 +158,7 @@ section h3 {
 .card {
   padding: 30px;
   border-radius: 20px;
-  background: var(--card);
+  background: rgba(255,255,255,0.05);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255,255,255,0.08);
   transition: 0.3s;
@@ -145,34 +170,44 @@ section h3 {
 }
 
 .card h4 {
-  margin-bottom: 15px;
   color: var(--accent);
+  margin-bottom: 10px;
 }
 
 .card p {
   color: var(--muted);
 }
 
-/* FOOTER */
-
 footer {
   padding: 40px;
   text-align: center;
   background: #05070c;
   color: var(--muted);
-  font-size: 14px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- 🔥 Движущиеся линии -->
+<div class="background">
+  <!-- 40 линий скорости -->
+  <script>
+    for(let i=0;i<40;i++){
+      const span=document.createElement("span");
+      span.style.left=Math.random()*100+"%";
+      span.style.animationDuration=(2+Math.random()*2)+"s";
+      span.style.animationDelay=Math.random()*3+"s";
+      document.querySelector(".background").appendChild(span);
+    }
+  </script>
+</div>
+
 <nav>
   <h1>Potatto Racing</h1>
   <div>
     <a href="#about">О нас</a>
     <a href="#team">Состав</a>
-    <a href="#results">Результаты</a>
     <a href="#join">Вступить</a>
   </div>
 </nav>
@@ -180,10 +215,7 @@ footer {
 <header>
   <div>
     <h2>Potatto Racing Team</h2>
-    <p>
-      From potato to podium.  
-      Профессиональная симрейсинговая команда в GT3 и Endurance.
-    </p>
+    <p>From potato to podium 🥔🏁</p>
     <a href="#join" class="btn">Присоединиться</a>
   </div>
 </header>
@@ -193,61 +225,43 @@ footer {
   <div class="grid">
     <div class="card">
       <h4>Философия</h4>
-      <p>Дисциплина, аналитика телеметрии и стабильный темп на длинной дистанции.</p>
+      <p>Стабильность, стратегия и чистая борьба.</p>
     </div>
     <div class="card">
       <h4>Дисциплины</h4>
-      <p>GT3, LMP2, Endurance 6h / 12h / 24h.</p>
+      <p>GT3 • Endurance • Sprint</p>
     </div>
     <div class="card">
       <h4>Подход</h4>
-      <p>Командная стратегия, разбор гонок и постоянный рост.</p>
+      <p>Анализ телеметрии и командная работа.</p>
     </div>
   </div>
 </section>
 
 <section id="team">
-  <h3>Состав команды</h3>
+  <h3>Состав</h3>
   <div class="grid">
     <div class="card">
       <h4>Ivan “Mashed” F.</h4>
-      <p>Team Captain • Endurance Specialist</p>
+      <p>Captain • Endurance</p>
     </div>
     <div class="card">
       <h4>Alex “Fries” K.</h4>
-      <p>GT3 • Qualifying Pace</p>
+      <p>GT3 Specialist</p>
     </div>
     <div class="card">
       <h4>Max “Hash” R.</h4>
-      <p>Strategy • Long Stints</p>
-    </div>
-  </div>
-</section>
-
-<section id="results">
-  <h3>Результаты</h3>
-  <div class="grid">
-    <div class="card">
-      <h4>🥇 P1 Endurance League</h4>
-      <p>Сезон 2025</p>
-    </div>
-    <div class="card">
-      <h4>🥈 GT3 Sprint Series</h4>
-      <p>Top Split</p>
-    </div>
-    <div class="card">
-      <h4>🏁 24h Race</h4>
-      <p>Top 5 Overall</p>
+      <p>Strategy</p>
     </div>
   </div>
 </section>
 
 <section id="join">
-  <h3>Вступить в команду</h3>
+  <h3>Вступить</h3>
   <div class="grid">
     <div class="card">
-      <h4>Мы ищем:</h4>
-      <p>Стабильных пилотов с желанием расти и участвовать в лигах.</p>
+      <h4>Готов ехать?</h4>
+      <p>Присоединяйся к Potatto Racing Team.</p>
       <br>
       <a href="#" class="btn">Подать заявку</a>
     </div>
@@ -256,7 +270,6 @@ footer {
 
 <footer>
   © 2026 Potatto Racing Team  
-  <br>Built for speed 🏁
 </footer>
 
 </body>
